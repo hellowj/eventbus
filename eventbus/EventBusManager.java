@@ -1,7 +1,5 @@
 package com.company.beijing.app.eventbus;
 
-import com.esri.beijing.arcgisapp.Log;
-
 import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.Set;
@@ -27,7 +25,6 @@ public class EventBusManager {
                     Class<?> w = destination.getClass();
                     try
                     {
-                        Log.d("EventBusManager, class=" + destination.getClass().getName() + ",method=" + method);
                         Method action=w.getMethod(method,Object.class);
                         action.invoke(destination,parameters);
                     } catch (Exception e) { e.printStackTrace(); }
@@ -62,7 +59,6 @@ public class EventBusManager {
     }
     public static void dispatchEvent(Object source, String eventId, Object parameters)
     {
-        Log.d("dispatchEvent, class="+source.getClass().getName()+",eventId="+eventId);
         EventMessage event = new EventMessage(source, eventId,parameters);
         notifyListeners(eventId, event);
     }
